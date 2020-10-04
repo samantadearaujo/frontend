@@ -36,9 +36,12 @@ export default function App() {
 
 const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  
   return(
     <View style={styles.container}>
        
+       {/* HEADER */}
       <View  style={styles.headerExt}>
         <View style={styles.headerInt1}>
          
@@ -58,6 +61,7 @@ const HomeScreen = ({ navigation }) => {
          </View>
       </View>
 
+      {/* HORIZONTAL MENU */}
       <View style={styles.svcontainer}>
       <ScrollView         
         showsHorizontalScrollIndicator={false}
@@ -70,10 +74,12 @@ const HomeScreen = ({ navigation }) => {
       </ScrollView>
       </View>
 
+      {/* MAIN IMAGE */}
       <View style={styles.imagemView}>
       <Image style={styles.imagem} source={require('./images/imagem-capa.png')}/>
       </View>
 
+      {/* MODAL */}
       <Modal
         animationType="slide"
         
@@ -98,16 +104,16 @@ const HomeScreen = ({ navigation }) => {
             <TouchableOpacity style={stylesModal.modalButton2}
               onPress={() => {
                 setModalVisible(!modalVisible);
-              }}
-            >
+                navigation.navigate('Map');
+              }} >
               <Text style={stylesModal.textStyle}>ENCONTRE</Text>
               <Image style={stylesModal.imgModal} source={require('./images/icons/flag.png')}/>
             </TouchableOpacity>
+            
             <TouchableOpacity style={stylesModal.modalButton3}
               onPress={() => {
-                navigation.navigate('Map');
-              }}
-            >
+                setModalVisible(!modalVisible);
+              }}>
               <Text style={stylesModal.textStyle}>CHECK-IN</Text>
               <Image style={stylesModal.imgModal} source={require('./images/icons/cod_barras.png')}/>
             </TouchableOpacity>
@@ -123,7 +129,9 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-      
+      {/* END OF MODAL */}
+
+      {/* FLOATING BUTTON */}
       <TouchableOpacity 
           style={styles.floatingButton}
           onPress={()=> {setModalVisible(true)}}
@@ -147,6 +155,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  //HEADER
   icon:{
     width: 100,
     height: 100,
@@ -188,6 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 
+  //HORIZONTAL MENU
   svcontainer:{
     flex:0.1,
     justifyContent: 'center',
@@ -202,6 +212,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
 
+  //MAIN IMAGE 
   imagemView:{
     flex: 0.3,
     width: "100%",
@@ -231,6 +242,7 @@ const styles = StyleSheet.create({
 
 });
 
+//MODAL STYLESHEET
 const stylesModal = StyleSheet.create ({
   centeredView: {
     flex: 1,
@@ -249,7 +261,7 @@ const stylesModal = StyleSheet.create ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     position: 'absolute',
-    bottom: 170,
+    bottom: 200,
     right: 0,
     
   },
@@ -258,7 +270,7 @@ const stylesModal = StyleSheet.create ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     position: 'absolute',
-    bottom: 135,
+    bottom: 150,
     right: 0,
   },
   modalButton3: {
