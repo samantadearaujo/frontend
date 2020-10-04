@@ -5,8 +5,6 @@ import { StyleSheet, Text, View, Image, Button,ScrollView, TouchableOpacity, Mod
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Map from './Map';
-import Checkin from './Checkin';
-import Compras from './Compras';
 
 const Stack = createStackNavigator();
 
@@ -27,12 +25,8 @@ export default function App() {
           component={FilaScreen}
           />
         <Stack.Screen 
-          name="Checkin"
-          component={Checkin}
-        />
-        <Stack.Screen 
-          name="Compras"
-          component={Compras}
+          name="Map"
+          component={Map}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -110,8 +104,8 @@ const HomeScreen = ({ navigation }) => {
               <Image style={stylesModal.imgModal} source={require('./images/icons/flag.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={stylesModal.modalButton3}
-              onPress={() => {setModalVisible(false),
-                navigation.navigate('Checkin');
+              onPress={() => {
+                navigation.navigate('Map');
               }}
             >
               <Text style={stylesModal.textStyle}>CHECK-IN</Text>

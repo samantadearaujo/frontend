@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image, ScrollView, Button, Modal} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function Map (){
+
+export default function Checkin ({navigation}){
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,18 +17,20 @@ export default function Map (){
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
+    navigation.navigate('Compras');
+      
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Solicitando permissão de câmera</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>Sem acesso a câmera</Text>;
   }
 
   return(
-        <>
+    <>
     <View style = {styles.container}>
 
       <View style={styles.headerExt}>
@@ -52,10 +55,10 @@ export default function Map (){
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
-        {scanned && <Button color={'#F2B938'} title={'Escanear Novamente'} onPress={() => setScanned(false)} />}
+        {scanned && <Button color={'#F2B938'} title={'Escanear Novamente'} onPress={() =>setScanned(false)} />}
   </View>
 
-  <Text>E aew, funcionou?</Text></>
+    </>
                
   );
 }
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       alignItems: 'center',
       alignContent: 'center',
-      marginTop: '5%'
+      marginTop: '10%'
     },
 
     containerInter: {

@@ -1,33 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image, ScrollView, Button, Modal} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { color } from 'react-native-reanimated';
 
-export default function Map (){
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
-
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-
+export default function Compras ({navigation}){
   return(
-        <>
+    <>
     <View style = {styles.container}>
 
       <View style={styles.headerExt}>
@@ -42,37 +21,41 @@ export default function Map (){
       </View>
 
       <View style={styles.containerInter}>
-          <Text style = {styles.textInter}>Aponte o leitor abaixo para o código na entrada da loja para realizar seu check-in</Text>
+          <Text style = {{color:'#F2B938', fontSize: 32, fontWeight: 'bold'}}>Loja Jeito de Ser</Text>
+          <Text>Seja bem vind@</Text>
+          <Image style={styles.imageCenter} source={require('./images/compras_sacola.png')} />
       </View>
-
-  </View>
-
-  <View style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-end',}}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        {scanned && <Button color={'#F2B938'} title={'Escanear Novamente'} onPress={() => setScanned(false)} />}
-  </View>
-
-  <Text>E aew, funcionou?</Text></>
+      <Button color={'#F2B938'} title={'Comprar'} onPress={() =>navigation.navigate('Checkin')} />
+      {/* <Button color={'#F2B938'} title={'Comprar'} onPress={() =>navigation.navigate('Checkin')}></Button> */}
+    </View>
+    </>
                
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 0.5,
+      flex: 1,
       backgroundColor: 'white',
       alignItems: 'center',
-      alignContent: 'center',
-      marginTop: '5%'
+      justifyContent: 'center',
+      marginTop: '10%',
+    },
+
+    imageCenter:{
+        alignContent:'center',
+        justifyContent: 'center',
+    },
+
+    buttonStyle:{
+        backgroundColor: '#F2B938',
+        width: '100%',
     },
 
     containerInter: {
-      flex: 0.8,
-      backgroundColor: '#F2B938',
-      textAlign: 'center',
+      flex: 1,
+      textAlignVertical: 'center',
+      alignItems: 'center',
       justifyContent: 'center',
     },
     
@@ -85,7 +68,7 @@ const styles = StyleSheet.create({
     textInter: {
       fontSize: 18,
       justifyContent: 'center',
-      margin: '10%'
+      margin: '10%',
     },
 
     icon:{
