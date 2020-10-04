@@ -1,64 +1,12 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
-import MapView, {Marker} from 'react-native-maps';
+import MapView,  {Marker} from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image,TouchableOpacity,TouchableHighlight, Alert, ImageBackground, Modal,PermissionsAndroid} from 'react-native';
 
-{/*
-import Geolocation from '@react-native-community/geolocation';
-
-Geolocation.setRNConfiguration(config);
-
-interface ILocation {
-    latitude: number;
-    longitude: number;
-  }
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: "Cool Photo App Camera Permission",
-          message:
-            "Natura App precisa acessar sua localização. " +
-            "Permitir acesso?",
-          buttonNeutral: "Pergunte mais tarde",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
-      } else {
-        console.log("Camera permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  }; */}
-export default function Map({ navigation }){
+export default function Map({ navigation} : { navigation: any}) 
+  {
     const [modalVisible, setModalVisible] = useState(false);
-    let myCoordinate= {latitude: 41.068038, longitude:29.065231}
-    
-{/*   const [location, setLocation] = useState<ILocation | undefined>(undefined);
-
-    useEffect(() => {
-        Geolocation.getCurrentPosition(
-        position => {
-            const {latitude, longitude} = {latitude: 41.068038, longitude:29.065231}; //position.coords;
-            
-
-            setLocation({
-            latitude,
-            longitude,
-            });
-        },
-        error => {
-            console.log(error.code, error.message);
-        },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-    }, []);
-*/}
+    let myCoordinate= {latitude:-23.5554272, longitude:-46.6048644}
 
     return(
         <View style={styles.container}>
