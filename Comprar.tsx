@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image, ScrollVi
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 
-export default function Checkin ({navigation}){
+export default function Comprar ({navigation}){
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,7 +18,7 @@ export default function Checkin ({navigation}){
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     // alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
-    navigation.navigate('BoasVindas');
+    navigation.navigate('Sacola');
       
   };
 
@@ -45,7 +45,7 @@ export default function Checkin ({navigation}){
       </View>
 
       <View style={styles.containerInter}>
-          <Text style = {styles.textInter}>Aponte o leitor abaixo para o código na entrada da loja para realizar seu check-in</Text>
+          <Text style = {styles.textInter}>Aponte o leitor abaixo para o código dos produtos para ter acesso à informações</Text>
       </View>
 
   </View>

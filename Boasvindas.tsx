@@ -1,34 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image, ScrollView, Button, Modal} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { color } from 'react-native-reanimated';
 
 
-export default function Checkin ({navigation}){
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    // alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
-    navigation.navigate('BoasVindas');
-      
-  };
-
-  if (hasPermission === null) {
-    return <Text>Solicitando permissão de câmera</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>Sem acesso a câmera</Text>;
-  }
-
+export default function boasvindas ({navigation}){
   return(
     <>
     <View style = {styles.container}>
@@ -45,19 +21,22 @@ export default function Checkin ({navigation}){
       </View>
 
       <View style={styles.containerInter}>
-          <Text style = {styles.textInter}>Aponte o leitor abaixo para o código na entrada da loja para realizar seu check-in</Text>
+          <Text style = {{color:'#F2B938', fontSize: 40, fontWeight: 'bold'}}>Loja Jeito de Ser</Text>
+          <Text style={{fontSize: 25}}>Seja bem vind@</Text>
+          <Text/>
+          <Text/>
+          <Text/>
+          <Image style={styles.imageCenter} source={require('./images/compras_sacola.png')} />
+          <Text/>
+          <Text/>
+          <Text/>
+          <Text style={{fontSize: 20, padding: 30, textAlign: 'center'}}>Fique a vontade para começar suas compras.</Text>
       </View>
 
-  </View>
-
-  <View style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-end',}}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        {scanned && <Button color={'#F2B938'} title={'Escanear Novamente'} onPress={() =>setScanned(false)} />}
-  </View>
-
+      <TouchableOpacity onPress={() => navigation.navigate('Comprar')} style={styles.buttonStyle}>
+        <Text style={{color: 'black', fontSize: 20, alignSelf: 'center'}}>Comprar</Text>
+      </TouchableOpacity>
+    </View>
     </>
                
   );
@@ -65,17 +44,31 @@ export default function Checkin ({navigation}){
 
 const styles = StyleSheet.create({
     container: {
-      flex: 0.5,
+      flex: 1,
       backgroundColor: 'white',
       alignItems: 'center',
-      alignContent: 'center',
-      marginTop: '10%'
+      justifyContent: 'center',
+      marginTop: '10%',
+    },
+
+    imageCenter:{
+        alignContent:'center',
+        justifyContent: 'center',
+    },
+
+    buttonStyle:{
+        backgroundColor: '#F2B938',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 40,
+        
     },
 
     containerInter: {
-      flex: 0.8,
-      backgroundColor: '#F2B938',
-      textAlign: 'center',
+      flex: 1,
+      textAlignVertical: 'center',
+      alignItems: 'center',
       justifyContent: 'center',
     },
     
@@ -88,7 +81,7 @@ const styles = StyleSheet.create({
     textInter: {
       fontSize: 18,
       justifyContent: 'center',
-      margin: '10%'
+      margin: '10%',
     },
 
     icon:{

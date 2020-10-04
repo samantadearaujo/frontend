@@ -6,7 +6,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Map from './Map';
 import Checkin from './Checkin';
-import Compras from './Compras';
+import boasvindas from './Boasvindas';
+import Comprar from './Comprar';
+import Produtos from './Produtos';
 
 const Stack = createStackNavigator();
 
@@ -31,8 +33,16 @@ export default function App() {
           component={Checkin}
         />
         <Stack.Screen 
-          name="Compras"
-          component={Compras}
+          name="BoasVindas"
+          component={boasvindas}
+        />
+        <Stack.Screen 
+          name="Comprar"
+          component={Comprar}
+        />
+        <Stack.Screen 
+          name="Produtos"
+          component={Produtos}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -109,9 +119,10 @@ const HomeScreen = ({ navigation }) => {
               <Text style={stylesModal.textStyle}>ENCONTRE</Text>
               <Image style={stylesModal.imgModal} source={require('./images/icons/flag.png')}/>
             </TouchableOpacity>
+            
             <TouchableOpacity style={stylesModal.modalButton3}
               onPress={() => {setModalVisible(false),
-                navigation.navigate('Checkin');
+                navigation.navigate('Comprar');
               }}
             >
               <Text style={stylesModal.textStyle}>CHECK-IN</Text>

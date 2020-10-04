@@ -4,29 +4,18 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { color } from 'react-native-reanimated';
 
 
-export default function Compras ({navigation}){
+export default function Produtos ({navigation}){
   return(
     <>
     <View style = {styles.container}>
 
-      <View style={styles.headerExt}>
-        <View style={styles.headerInt1}>
-          <Image style={styles.imgHeader} source={require('./images/icons/menu.png')} />
-          <Image style={styles.logoHeader} source={require('./images/natura-logo-h1.png')} />
-        </View>
-        <View style={styles.headerInt2}>
-          <Text style={styles.headText}>CHECK-IN</Text>
-        </View>
-      
+      <View style={styles.containerInter}>
+          <Image style={styles.imageCenter} source={require('./images/CardProduto.png')} />
       </View>
 
-      <View style={styles.containerInter}>
-          <Text style = {{color:'#F2B938', fontSize: 32, fontWeight: 'bold'}}>Loja Jeito de Ser</Text>
-          <Text>Seja bem vind@</Text>
-          <Image style={styles.imageCenter} source={require('./images/compras_sacola.png')} />
-      </View>
-      <Button color={'#F2B938'} title={'Comprar'} onPress={() =>navigation.navigate('Checkin')} />
-      {/* <Button color={'#F2B938'} title={'Comprar'} onPress={() =>navigation.navigate('Checkin')}></Button> */}
+      <TouchableOpacity onPress={() => navigation.navigate('Comprar')} style={styles.buttonStyle}>
+        <Text style={{color: 'black', fontSize: 20, alignSelf: 'center'}}>ADICIONAR À SACOLA</Text>
+      </TouchableOpacity>
     </View>
     </>
                
@@ -34,30 +23,32 @@ export default function Compras ({navigation}){
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: '10%',
+  
+  imageCenter:{
+    flex: 1,
+    resizeMode: 'contain',
+    width: "100%",
+  },
+  
+  containerInter: {
+    flex: 1,
+    alignItems: 'flex-start',
     },
 
-    imageCenter:{
-        alignContent:'center',
-        justifyContent: 'center',
-    },
-
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  
     buttonStyle:{
         backgroundColor: '#F2B938',
+        textAlign: 'center',
+        justifyContent: 'center',
         width: '100%',
+        height: 40,
+        
     },
 
-    containerInter: {
-      flex: 1,
-      textAlignVertical: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     
     headText:{
       fontSize: 22,
