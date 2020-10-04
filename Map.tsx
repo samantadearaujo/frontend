@@ -4,14 +4,15 @@ import MapView, {Marker} from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image,TouchableOpacity,TouchableHighlight, Alert, ImageBackground, Modal, FlatList,SafeAreaView} from 'react-native';
 
  
-export default function Map({ navigation }){
+export default function Map({ navigation} : { navigation: any}) 
+{
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedId,setSelectedId] = useState(null);
     const [selectedItem,setSelectedItem] = useState({});
 
     const [selectedModulo,setSelectedModulo] = useState("ModalButtons");
 
-    let myCoordinate= {latitude: 41.068038, longitude:29.065231}
+    let myCoordinate= {latitude:-23.5554272, longitude:-46.6048644}
 
     const DATA =[
       {
