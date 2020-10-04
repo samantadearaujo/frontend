@@ -42,10 +42,36 @@ export default function Map({ navigation} : { navigation: any})
                         longitudeDelta: 0.0421,
                       }}
                 >
-                    <Marker coordinate={{
+                    <Marker 
+                     key= {1}
+                    coordinate={{
               latitude: myCoordinate.latitude,
               longitude: myCoordinate.longitude,
-            }}/>
+            }}           
+            image={require('./images/map/pin-green.png')}
+            
+            />
+
+            <Marker 
+            key= {2}
+            coordinate={{
+              latitude: -23.5827586,
+              longitude: -46.5943222            
+            }} 
+            image={require('./images/map/pin-yellow.png')}
+                  
+           />
+
+            <Marker 
+              key= {3}
+            coordinate={{
+              latitude: -22.1295223,
+              longitude: -51.4009075,
+            }}
+            image={require('./images/map/pin-red.png')}
+           
+            />
+            
                 </MapView>
                 
             </View>
