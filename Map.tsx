@@ -1,65 +1,138 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import MapView, {Marker} from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Image,TouchableOpacity,TouchableHighlight, Alert, ImageBackground, Modal,PermissionsAndroid} from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image,TouchableOpacity,TouchableHighlight, Alert, ImageBackground, Modal, FlatList,SafeAreaView} from 'react-native';
+//import { FlatList } from 'react-native-gesture-handler';
+ 
+const DATA =[
+  {
+    id: "1a",
+    data:{
+      day: "HOJE",
+      date:"05/10/2020",
+      time:"13h00 - 13h30",
+    },
+  },
+  {
+    id: "2a",
+    data:{
+      day: "HOJE",
+      date:"05/10/2020",
+      time:"15h30 - 16h00",
+    },
+  },
+  {
+    id: "3a",
+    data:{
+      day: "HOJE",
+      date:"05/10/2020",
+      time:"16h00 - 16h30",
+    },
+  },
+]
+ 
+const Item = ({item, onPress, style}) =>(
+  
+    <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+      <Text style={styles.title}>{item.data.day}</Text>
+      <Text style={styles.title}>{item.data.date}</Text>
+      <Text style={styles.title}>{item.data.time}</Text>
+    </TouchableOpacity>
+);
 
-{/*
-import Geolocation from '@react-native-community/geolocation';
+ const SelectedItem = ({item})=> (
+    <View style={styles.itemSelecionado}>
+      <Text style={styles.title}>{item.data.day}</Text>
+      <Text style={styles.title}>{item.data.date}</Text> 
+      <Text style={styles.title}>{item.data.time}</Text>
+    </View>
+ ); 
 
-Geolocation.setRNConfiguration(config);
-
-interface ILocation {
-    latitude: number;
-    longitude: number;
-  }
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: "Cool Photo App Camera Permission",
-          message:
-            "Natura App precisa acessar sua localização. " +
-            "Permitir acesso?",
-          buttonNeutral: "Pergunte mais tarde",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
-      } else {
-        console.log("Camera permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  }; */}
 export default function Map({ navigation }){
     const [modalVisible, setModalVisible] = useState(false);
+    const [selectedId,setSelectedId] = useState(null);
+    const [selectedItem,setSelectedItem] = useState({});
+
+    const [selectedModulo,setSelectedModulo] = useState("ModalButtons");
+
     let myCoordinate= {latitude: 41.068038, longitude:29.065231}
-    
-{/*   const [location, setLocation] = useState<ILocation | undefined>(undefined);
 
-    useEffect(() => {
-        Geolocation.getCurrentPosition(
-        position => {
-            const {latitude, longitude} = {latitude: 41.068038, longitude:29.065231}; //position.coords;
+
+    {/* MODULOS */}
+
+    {/* MODULO AGENDA HORARIO */}
+    const renderItem = ({item}) => {
+      const backgroundColor = item.id === selectedId ? "#D5D5D5" : "white";
+      return (
+        <Item
+          item={item}
+          onPress={() => {
+            setSelectedId(item.id);
+            setSelectedItem(item);
+            setSelectedModulo('ModalSelectedItem')
+          }}
+          style={{...styles.item, backgroundColor, }}
+        />
+      );
+    };
+
+    const ModalAgendaHorario = (
+      <View style={stylesModal.dynamicContainer}>
+        <Text style={stylesModal.textModalBody}>AGENDE SEU ATENDIMENTO</Text>
+        <SafeAreaView style={styles.safeAreaContainer}>
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={(item)=> item.id}
+            extraData={selectedId}
+          />
+        </SafeAreaView>
+      </View>
+    );
+
+    {/* MODULO BOTÃO */}
+    const ModalButtons = (
+
+      <View style={stylesModal.dynamicContainer}>
+        <Text style={stylesModal.textModalBody}>AGENDE SEU ATENDIMENTO</Text>
+        <TouchableHighlight
+        style={stylesModal.modalButton2}
+        underlayColor={'#F2AA33'}
+        onPress={() => {
             
+            navigation.navigate('Map');
+            setSelectedModulo('ModalAgendaHorario');
+        }} >
+          <Text style={stylesModal.textStyle}>Horários com consutorias</Text>
+        </TouchableHighlight>
+          
+        <TouchableHighlight
+        style={stylesModal.modalButton2}
+        underlayColor={'#F2AA33'}
+        onPress={() => {
+          setSelectedModulo('ModalAgendaHorario');            
+        }}>
+          <Text style={stylesModal.textStyle}>Horários sem consultoria</Text>
+        </TouchableHighlight>
+      </View>
+    );
 
-            setLocation({
-            latitude,
-            longitude,
-            });
-        },
-        error => {
-            console.log(error.code, error.message);
-        },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-    }, []);
-*/}
-
+    {/* MODULO ITEM SELECIONADO */}
+    const ModalSelectedItem = (
+      <View style={stylesModal.dynamicContainer}>
+        <View style={stylesModal.confirmacao}>
+          <Image style={{...stylesModal.imageModal,marginTop:0}} source={require('./images/icons/check.png')}/>
+          <Text style={stylesModal.textStyleModalFooter}>ATENDIMENTO CONFIRMADO</Text>
+        </View>
+        <View style={stylesModal.confirmacao}>
+          <SelectedItem
+            item={selectedItem}
+          />                             
+        </View>
+      </View>
+    );
+    
+    
     return(
         <View style={styles.container}>
             
@@ -103,6 +176,7 @@ export default function Map({ navigation }){
             </View>
             {/* END OF MAP */}
             
+            {/* MODAL */}
             <Modal
                 animationType="slide"
                 
@@ -133,27 +207,13 @@ export default function Map({ navigation }){
                     </View>
 
                     <View style={stylesModal.modalBody}>
-                        <Text style={stylesModal.textModalBody}>AGENDE SEU ATENDIMENTO</Text>
-                        <TouchableHighlight
-                        style={stylesModal.modalButton2}
-                        underlayColor={'#F2AA33'}
-                        onPress={() => {
-                            setModalVisible(!modalVisible);
-                            navigation.navigate('Map');
-                        }} >
-                        <Text style={stylesModal.textStyle}>Horários com consutorias</Text>
-                        </TouchableHighlight
->
                         
-                        <TouchableHighlight
-                        style={stylesModal.modalButton2}
-                        underlayColor={'#F2AA33'}
-                        onPress={() => {
-                            setModalVisible(!modalVisible);
-                        }}>
-                        <Text style={stylesModal.textStyle}>Horários sem consultoria</Text>
-                        </TouchableHighlight
->    
+                        
+                      {selectedModulo === 'ModalButtons' ? (ModalButtons) : null}
+                      {selectedModulo === 'ModalAgendaHorario' ? (ModalAgendaHorario) : null}
+                      {selectedModulo === 'ModalSelectedItem' ? (ModalSelectedItem) : null}    
+                          
+      
                     </View>
 
                     <View style={stylesModal.modalFooter}>
@@ -164,28 +224,27 @@ export default function Map({ navigation }){
                         }}
                         >
                         <Text style={stylesModal.textStyleModalFooter}>CONFIRMAR</Text>
-                        </TouchableHighlight
->
+                        </TouchableHighlight>
                         <TouchableHighlight
                          style={stylesModal.modalButton1}
                          onPress={() => {
                             setModalVisible(!modalVisible);
-                            navigation.navigate('Map');
+                            navigation.navigate('Home');
                         }} >
                         <Text style={stylesModal.textStyleModalFooter}>TRAÇAR ROTA</Text>
-                        </TouchableHighlight
->
+                        </TouchableHighlight>
                     </View>                 
                 </View>
                 </View>
             </Modal>
-      
+            {/* END OF MODAL */}
+
             {/* FOOTER */}
             <View style={styles.footer}> 
                 <ImageBackground style={styles.imgFooter} source={require('./images/icons/base-maps.png')}>
                     <TouchableOpacity
                         style={styles.footerButton}
-                        onPress={() => {setModalVisible(true)}}
+                        onPress={() => {setModalVisible(true), setSelectedModulo('ModalButtons')}}
                     >
                         <Image style={styles.imgButton} source={require('./images/icons/store-button.png')}/>
                         <Text style={styles.textFooter}>Loja</Text>
@@ -299,6 +358,42 @@ const styles = StyleSheet.create({
         fontSize: 14,
         margin:-7
       },
+
+      item: {
+        flex:1,
+        width:'98%',
+        flexDirection:'row',
+        padding: 20,
+        alignItems:'center',
+        justifyContent:'space-between',
+        alignSelf:'center'
+      },
+
+      itemSelecionado:{
+        flex:1,
+        width:'98%',
+        flexDirection:'row',
+        padding: 20,
+        alignItems:'center',
+        justifyContent:'space-between',
+        alignSelf:'center',
+        backgroundColor:'#D5D5D5'
+      },
+
+      title: {
+        fontSize: 16,
+
+
+      },
+      safeAreaContainer:{
+        flex:0.8,
+        width:'90%',
+
+        borderColor: '#D5D5D5',
+        borderWidth: 1,
+        borderRadius: 5,
+        justifyContent:'center'
+      },
 });
 
 const stylesModal = StyleSheet.create ({
@@ -354,6 +449,15 @@ const stylesModal = StyleSheet.create ({
 
         alignItems: 'center',
         justifyContent:'space-evenly'
+    },
+    dynamicContainer:{
+      flex: 1,
+      width:"100%",
+      flexDirection:'column',
+      alignItems: 'center',
+      justifyContent:'space-around',
+      backgroundColor:'white',
+      textAlign: 'center',
     },
     modalBody:{
         flex: 0.5,
@@ -415,8 +519,16 @@ const stylesModal = StyleSheet.create ({
       resizeMode:'contain',
       height:'200%',
       marginTop: -40,
-      borderBottomColor:'#E7E7E7',
     },
 
-  
+    confirmacao:{
+      flex: 0.5,
+      width:'90%',
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent:'space-evenly',
+    }
   });
+
+
+
