@@ -24,6 +24,10 @@ export default function App() {
           component={HomeScreen}
           options={{title:'Natura App'}} />
 
+         <Stack.Screen
+            name='Map'
+            component={Map}/>
+
         <Stack.Screen
           name="Fila"
           component={FilaScreen}
@@ -50,7 +54,7 @@ export default function App() {
   ); 
 }
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation} : { navigation: any}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   
