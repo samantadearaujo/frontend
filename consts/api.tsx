@@ -1,0 +1,1 @@
+export const _LIVE_URL = `https://cocky-nobel-d975c0.netlify.app/data/naturastore-6f26d-export.json`

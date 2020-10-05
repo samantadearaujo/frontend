@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image,TouchableOpacity,TouchableHighlight, Alert, ImageBackground, Modal, FlatList,SafeAreaView} from 'react-native';
 
+
+import { _LIVE_URL } from '../frontend/consts/api';
  
 export default function Map({ navigation} : { navigation: any}) 
 {
@@ -12,49 +14,20 @@ export default function Map({ navigation} : { navigation: any})
 
     const [selectedModulo,setSelectedModulo] = useState("ModalButtons");
 
-    let myCoordinate= {latitude:-23.5554272, longitude:-46.6048644}
+    const myCoordinate= {latitude:-23.5554272, longitude:-46.6048644}
 
-    const DATA =[
-      {
-        id: "1a",
-        data:{
-          day: "HOJE",
-          date:"05/10/2020",
-          time:"13h00 - 13h30",
-        },
-      },
-      {
-        id: "2a",
-        data:{
-          day: "HOJE",
-          date:"05/10/2020",
-          time:"15h30 - 16h00",
-        },
-      },
-      {
-        id: "3a",
-        data:{
-          day: "HOJE",
-          date:"05/10/2020",
-          time:"16h00 - 16h30",
-        },
-      },
-    ]
+    const DATA = JSON.parse(_LIVE_URL);
      
     const Item = ({item, onPress, style}) =>(
       
         <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-          <Text style={styles.title}>{item.data.day}</Text>
-          <Text style={styles.title}>{item.data.date}</Text>
-          <Text style={styles.title}>{item.data.time}</Text>
+          <Text style={styles.title}>{item.Lojas.NoSchecule}</Text>
         </TouchableOpacity>
     );
     
      const SelectedItem = ({item})=> (
         <View style={styles.itemSelecionado}>
-          <Text style={styles.title}>{item.data.day}</Text>
-          <Text style={styles.title}>{item.data.date}</Text> 
-          <Text style={styles.title}>{item.data.time}</Text>
+          <Text style={styles.title}>{item.Lojas.NoSchecule}</Text>
         </View>
      ); 
     
