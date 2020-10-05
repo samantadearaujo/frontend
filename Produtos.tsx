@@ -13,7 +13,7 @@ export default function Produtos ({navigation}){
           <Image style={styles.imageCenter} source={require('./images/CardProduto.png')} />
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Comprar')} style={styles.buttonStyle}>
+      <TouchableOpacity onPress={() => navigation.navigate('Sacola')} style={styles.buttonStyle}>
         <Text style={{color: 'black', fontSize: 20, alignSelf: 'center'}}>ADICIONAR À SACOLA</Text>
       </TouchableOpacity>
     </View>

@@ -18,7 +18,7 @@ export default function Comprar ({navigation}){
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     // alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
-    navigation.navigate('Sacola');
+    navigation.navigate('Produtos');
       
   };
 

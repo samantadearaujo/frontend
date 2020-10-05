@@ -4,11 +4,17 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image, Button,ScrollView, TouchableOpacity, Modal, Alert, TouchableHighlight} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import Map from './Map';
 import Checkin from './Checkin';
-import boasvindas from './Boasvindas';
+import Boasvindas from './Boasvindas';
 import Comprar from './Comprar';
 import Produtos from './Produtos';
+import Sacola from './Sacola';
+import PagCaixa from './PagCaixa';
+import PagApp from './PagApp';
+import PagRealizado from './PagRealizado';
+import Checkout from './Checkout';
 
 const Stack = createStackNavigator();
 
@@ -38,7 +44,7 @@ export default function App() {
         />
         <Stack.Screen 
           name="BoasVindas"
-          component={boasvindas}
+          component={Boasvindas}
         />
         <Stack.Screen 
           name="Comprar"
@@ -47,6 +53,26 @@ export default function App() {
         <Stack.Screen 
           name="Produtos"
           component={Produtos}
+        />
+        <Stack.Screen 
+          name="Sacola"
+          component={Sacola}
+        />
+        <Stack.Screen 
+          name="PagCaixa"
+          component={PagCaixa}
+        />
+        <Stack.Screen 
+          name="PagApp"
+          component={PagApp}
+        />
+        <Stack.Screen 
+          name="PagRealizado"
+          component={PagRealizado}
+        />
+        <Stack.Screen 
+          name="Checkout"
+          component={Checkout}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -129,12 +155,13 @@ const HomeScreen = ({ navigation} : { navigation: any}) => {
               <Text style={stylesModal.textStyle}>ENCONTRE</Text>
               <Image style={stylesModal.imgModal} source={require('./images/icons/flag.png')}/>
             </TouchableOpacity>
-            
+
             <TouchableOpacity style={stylesModal.modalButton3}
-              onPress={() => {setModalVisible(false),
-                navigation.navigate('Comprar');
+              onPress={() => {{
+                navigation.navigate('Produtos');
+                setModalVisible(!modalVisible);
               }}
-            >
+              }>
               <Text style={stylesModal.textStyle}>CHECK-IN</Text>
               <Image style={stylesModal.imgModal} source={require('./images/icons/cod_barras.png')}/>
             </TouchableOpacity>
