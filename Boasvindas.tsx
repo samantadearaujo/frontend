@@ -4,7 +4,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { color } from 'react-native-reanimated';
 
 
-export default function boasvindas ({navigation}){
+export default function Boasvindas ({navigation}){
   return(
     <>
     <View style = {styles.container}>
@@ -33,7 +33,7 @@ export default function boasvindas ({navigation}){
           <Text style={{fontSize: 20, padding: 30, textAlign: 'center'}}>Fique a vontade para começar suas compras.</Text>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Comprar')} style={styles.buttonStyle}>
+      <TouchableOpacity onPress={() => navigation.navigate('Sacola')} style={styles.buttonStyle}>
         <Text style={{color: 'black', fontSize: 20, alignSelf: 'center'}}>Comprar</Text>
       </TouchableOpacity>
     </View>

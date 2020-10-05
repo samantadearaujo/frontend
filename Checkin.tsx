@@ -17,9 +17,9 @@ export default function Checkin ({navigation}){
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    // alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
+    alert('Check-in realizado com sucesso! Aproveite sua experiência Natura');
     navigation.navigate('BoasVindas');
-      
+    setScanned(false);  
   };
 
   if (hasPermission === null) {
