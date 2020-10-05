@@ -9,6 +9,14 @@ A pandemia de COVID-19 trouxe um cenário desafiador para o varejo mundial. A pe
 
 Agora, com a vacina da COVID-19 praticamente pronta, o comércio de rua se vê de frente à outro desafio: trazer os clientes de fora. Buscando
 
+
+Nossa Solução: 
+
+Segundo a pesquisa realizada pelo nosso grupo entre 25/09/20 e 02/10/20 em mídias sociais, e outras fontes, o consumidor ainda não se sente seguro em voltar à utilizar o comércio físico (38.6%), mas sente falta das facilidades encontradas nesse tipo de mercado, como consultoria sobre os produtos (57.1%) e liberdade para escolha de produtos (67%).
+
+Ouvindo o público, percebemos que fatores como número de pessoas na loja (46.2%), amostras de uso único (60.4%) e compra com contato 
+
+
 :hammer: Fluxo Agendamento
 
 <table>
@@ -42,5 +50,18 @@ Agora, com a vacina da COVID-19 praticamente pronta, o comércio de rua se vê d
 </table>
 
 
+::rocket:: Instalações necessárias
+<br/>Instalar o Expo Cli
+<br/>Instalar React-Native 
+<br/>Em seu terminal, execute:
+<br/>npm install para baixar as dependências localmente
+<br/>expo install expo-barcode-scanner
+
+::note::
+<br/>TypeScript
+<br/>Expo
+<br/>Expo Barcode Scanner
+
+@NaturaStore/Dev-be
 
 
